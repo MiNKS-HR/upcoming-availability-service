@@ -4,14 +4,17 @@ var AvailableDates = require('./models/availableDate.js');
 
 mongoose.connect('mongodb://localhost/airbnb');
 
-var seedDb = function(data) {
-  AvailableDates.insertOne(data, (err, response) => {
-    if (err) {
-      console.log('Error inserting into database: ' + err);
-    } else {
-      console.log('Saved successfully to the database: ' + response);
-    }
-  })
+var seedDb = function (data) {
+  AvailableDates.insertOne(data, function (err, response) {
+    mongoose.connection.close(function () {
+      if (err) {
+        console.log('Error inserting into database: ' + err);
+      } else {
+        console.log('Saved successfully to the database: ' + response);
+      }
+      console.log("Connection closed.");
+    });;
+  });
 };
 
 seedDb(data);
