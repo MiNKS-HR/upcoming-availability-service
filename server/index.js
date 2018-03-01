@@ -7,7 +7,7 @@ var app = express();
 mongoose.connect('mongodb://localhost/experiences');
 
 app.use(bodyParser.json());
-//app.use(express.static(__dirname + '/../react-client/dist'));
+app.use(express.static(__dirname + '/../client/dist'));
 app.use('/experience/availableDate', availableDateRouter);
 
 app.listen(8000, function() {
