@@ -6,7 +6,8 @@ var router = express.Router();
 
 router.route('/')
   .post(function (req, res) {
-    var currentCount = req.body.start;
+    var currentCount = req.body.data;
+
     AvailableDates.findSome(currentCount, (err, response) => {
       if (err) {
         console.log('Error retrieving data from database.');
