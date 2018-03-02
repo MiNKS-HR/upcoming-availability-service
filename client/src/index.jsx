@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AvailableDateModalList from './components/modalList.jsx';
-import Bootstrap from 'bootstrap';
+import axios from 'axios';
 import $ from 'jquery';
 
 class App extends React.Component {
@@ -13,26 +13,6 @@ class App extends React.Component {
     };
   }
   
-  getScheduledExperiences() {
-    $.ajax({
-      url: 'http://localhost:8000/experience/availableDate/',
-      method: 'POST',
-      data: JSON.stringify({start: this.state.counter}),
-      contentType: 'application/json',
-      success: (data) => {
-        let lastAvailableDate = data[data.length-1];
-        
-        this.setState({
-          counter: lastAvailableDate.id,
-          availableDates: this.state.availableDates.concat(data)
-        })
-      },
-      error: (xhr, status, error) => {
-        console.log('err', xhr, status, error);
-      }
-    })
-  }
-
   componentDidMount() {
     this.getScheduledExperiences();
     
@@ -41,6 +21,24 @@ class App extends React.Component {
       if (elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight()) {
         this.getScheduledExperiences();
       }
+    });
+  }
+
+  getScheduledExperiences() {
+    axios.post('http://localhost:8000/experience/availableDate/', {
+      data: this.state.counter
+    })
+    .then( (response) => {
+      let responseData = response.data;
+      let lastAvailableDate = responseData[responseData.length-1];
+        
+      this.setState({
+        counter: lastAvailableDate.id,
+        availableDates: this.state.availableDates.concat(responseData)
+      })
+    })
+    .catch(function (error) {
+      console.log('err', error);
     });
   }
 
