@@ -1,0 +1,15 @@
+.button {
+  float: 'right';
+}
+
+.text {
+  float: 'left';
+  line-height: '30px';
+}
+
+.outer {
+  border-bottom-width: '1px';
+  border-bottom-style: 'solid';
+  border-bottom-color: 'gray';
+  height: '30px';
+}
