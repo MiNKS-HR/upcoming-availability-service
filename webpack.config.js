@@ -31,6 +31,11 @@ var config = {
         query: {
           presets: ['es2015', 'react']
         }
+      },
+      {
+        test: /\.css$/,
+        include : APP_DIR,
+        loader : 'css'
       }
     ]
   },
