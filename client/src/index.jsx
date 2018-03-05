@@ -1,54 +1,58 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AvailableDateModalList from './components/modalList.jsx';
 import axios from 'axios';
 import $ from 'jquery';
+import AvailableDateModalList from './components/modalList.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       availableDates: [],
-      counter: 0
+      counter: 0,
     };
   }
-  
+
   componentDidMount() {
     this.getScheduledExperiences();
-    
-    $("#exampleModalLong").on("scroll", (e) => {
-      var elem = $(e.currentTarget);
-      if (elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight()) {
-        this.getScheduledExperiences();
-      }
-    });
+
+    if (this.props.default === false) {
+      $('#Modal').on('scroll', (e) => {
+        const elem = $(e.currentTarget);
+        if (elem[0].scrollHeight - elem.scrollTop() === elem.outerHeight()) {
+          this.getScheduledExperiences();
+        }
+      });
+    }
   }
 
   getScheduledExperiences() {
     axios.post('http://localhost:8000/experience/availableDate/', {
-      data: this.state.counter
+      data: this.state.counter,
     })
-    .then( (response) => {
-      let responseData = response.data;
-      let lastAvailableDate = responseData[responseData.length-1];
-        
-      this.setState({
-        counter: lastAvailableDate.id,
-        availableDates: this.state.availableDates.concat(responseData)
+      .then((response) => {
+        const responseData = response.data;
+        const lastAvailableDate = responseData[responseData.length - 1];
+
+        this.setState({
+          counter: lastAvailableDate.id,
+          availableDates: this.state.availableDates.concat(responseData),
+        });
       })
-    })
-    .catch(function (error) {
-      console.log('err', error);
-    });
+      .catch((error) => {
+        console.log('err', error);
+      });
   }
 
   render() {
     return (
       <div>
-        <AvailableDateModalList availableDates={this.state.availableDates}/>
+        <AvailableDateModalList availableDates={(this.props.default) ? this.state.availableDates.slice(0,3) : this.state.availableDates} />
       </div>
     );
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App default={false}/>, document.getElementById('app'));
+
+ReactDOM.render(<App default={true}/>, document.getElementById('app2'));

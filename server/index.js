@@ -13,3 +13,5 @@ app.use('/experience/availableDate', availableDateRouter);
 app.listen(8000, function() {
   console.log('listening on port 8000');
 });
+
+module.exports = app;

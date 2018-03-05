@@ -1,0 +1,19 @@
+.Text {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif;
+  line-height: 16px;
+}
+
+.Outer {
+  margin-bottom: 8px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+.Inner {
+  padding: 3px 6px;
+  border: 1px solid #F2F2F2;
+  background-color: #F2F2F2;
+  display: table-cell;
+}

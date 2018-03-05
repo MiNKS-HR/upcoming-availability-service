@@ -35,7 +35,7 @@ var config = {
       {
         test: /\.css$/,
         include : APP_DIR,
-        loader : 'css'
+        loader : 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
       }
     ]
   },
@@ -44,5 +44,10 @@ var config = {
     filename: 'bundle.js'
   }
 };
+// const commonConfig = merge([
+//   config,
+//   parts.loadCSS()
+// ]);
 
+// module.exports = commonConfig;
 module.exports = config;
