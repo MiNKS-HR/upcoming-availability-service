@@ -13,7 +13,7 @@ var seedDb = function (data) {
         console.log('Saved successfully to the database: ' + response);
       }
       console.log("Connection closed.");
-    });;
+    });
   });
 };
 

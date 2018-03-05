@@ -1,15 +1,59 @@
-.button {
-  float: 'right';
+.Button {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-right: 16px;
+  padding-left: 16px;
+  border-color: #008489;
+  background: transparent;
+  border-radius: 4px;
+
+  line-height: 18px;
+  font-size: 15px;
+  color: #008489;
+
+  cursor: pointer;
+
 }
 
-.text {
-  float: 'left';
-  line-height: '30px';
+.DateText {
+  font-size: 19px;
+  line-height: 24px;
+  font-weight: 300;
+  font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.TimeText {
+  margin-top: 8px;
+  font-size: 15px;
+  line-height: 18px;
+  letter-spacing: 0.2px;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  text-transform: uppercase;
+}
+.DetailText {
+  margin-top: 8px;
+  line-height: 18px;
+  letter-spacing: 0.2px;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
-.outer {
-  border-bottom-width: '1px';
-  border-bottom-style: 'solid';
-  border-bottom-color: 'gray';
-  height: '30px';
+
+.Outer {
+  border-bottom: 1px solid #DBDBDB;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+.Inner {
+  position: relative;
+  font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
