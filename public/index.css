@@ -1,0 +1,92 @@
+.title {
+  font-size:19px;
+  line-height:24px;
+  color:#484848;
+  font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  padding-top:24px;
+}
+
+.page-container {
+  padding-top:24px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.button-container {
+  border-bottom: 1px solid #DBDBDB;
+  width: 100%;
+  padding-top:24px;
+  padding-bottom:24px;
+}
+
+.button {
+  border-bottom: 1px solid #DBDBDB;
+  background: transparent;
+  text-align:left;
+  border:0px;
+  padding-left:0px;
+  -webkit-font-smoothing:antialiased;
+  font-weight:300;
+  font-size:19px;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif;
+  color: #008489;
+}
+
+.button:hover {
+  background: transparent;
+  color: #008489;
+  text-decoration: underline
+}
+
+.modal-close {
+  float: left;
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  display: block;
+}
+
+.modal-close-button {
+  height: 16px;
+  width: 16px;
+  display: block;
+  fill: rgb(118, 118, 118);
+}
+
+.modal-title {
+  font-size: 32px;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.modal-subtitle {
+  font-size: 19px;
+  font-weight: 300;
+  line-height: 24px;
+  -webkit-font-smoothing: antialiased;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.modal-header {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.modal-body {
+  padding: 32px;
+}
+
+/* .modal-dialog {
+  margin: 0;
+} */
+
+.modal-content {
+  border-radius: 0;
+  border: none;
+}
