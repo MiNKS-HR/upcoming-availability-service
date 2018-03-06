@@ -4,11 +4,6 @@ var AvailableDates = require('../../db/models/availableDate.js');
 
 var router = express.Router();
 
-// router.route('/api')
-//   .get(function (req, res) {
-//     res.status(200).send('Hello World!');
-//   });
-
 router.route('/:id')
   .get(function (req, res) {
     console.log('req.params.id', req.params.id);
@@ -18,7 +13,6 @@ router.route('/:id')
         console.log('Error retrieving data from database.' + err);
       } else {
         console.log('Successfully retrieved from database.');
-        console.log(response);
         res.status(200).json(response);
       }
     });
