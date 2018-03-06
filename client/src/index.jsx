@@ -16,7 +16,7 @@ class App extends React.Component {
   componentDidMount() {
     this.getScheduledExperiences();
 
-    if (this.props.default === false) {
+    if (this.props.isModal) {
       $('#Modal').on('scroll', (e) => {
         const elem = $(e.currentTarget);
         if (elem[0].scrollHeight - elem.scrollTop() === elem.outerHeight()) {
@@ -27,9 +27,9 @@ class App extends React.Component {
   }
 
   getScheduledExperiences() {
-    axios.post('http://localhost:8000/experience/availableDate/', {
-      data: this.state.counter,
-    })
+    let currentCounter = this.state.counter;
+
+    axios.get('http://localhost:3002/experience/availableDate/' + currentCounter)
       .then((response) => {
         const responseData = response.data;
         const lastAvailableDate = responseData[responseData.length - 1];
@@ -47,12 +47,12 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <AvailableDateModalList availableDates={(this.props.default) ? this.state.availableDates.slice(0,3) : this.state.availableDates} />
+        <AvailableDateModalList availableDates={(this.props.isModal) ? this.state.availableDates : this.state.availableDates.slice(0,3)} />
       </div>
     );
   }
 }
 
-ReactDOM.render(<App default={false}/>, document.getElementById('app'));
+ReactDOM.render(<App isModal={false}/>, document.getElementById('app2'));
 
-ReactDOM.render(<App default={true}/>, document.getElementById('app2'));
+ReactDOM.render(<App isModal={true}/>, document.getElementById('app'));
