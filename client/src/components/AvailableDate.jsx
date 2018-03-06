@@ -9,32 +9,21 @@ class AvailableDate extends React.Component {
   }
   render() {
     let { availableDate } = this.props;
-    var __startTime = moment(availableDate.start_date).format('h:mm a');
-    var __endTime = moment(availableDate.end_date).format();
-    
-    var __duration = moment.duration(moment(__endTime).diff(__startTime));
-    var __hours = __duration.asHours();
-    console.log(__hours);
 
     let startTime = moment(availableDate.start_date).format('h:mm a');
     let endTime = moment(availableDate.end_date).format('h:mm a');
-
-    let dateStr = moment(availableDate.start_date).format('ddd, MMM D');
-
-
+    let dateFormatted = moment(availableDate.start_date).format('ddd, MMM D');
+    
     let spotsLeft = availableDate.remaining_capacity;
+
     return (
       <div>
         <div className={styles.Outer}>
         <div className={styles.Inner}>
           {spotsLeft < 3 && <SpotsLeft spotsLeft={spotsLeft}/>}
           <div>
-            {/* {availableDate.id} */}
-            {/* {availableDate.start_date} */}
-            {/* {availableDate.end_date} */}
-            {/* {availableDate.max_guests} */}
             <div className={styles.DateText}>
-            {dateStr}
+            {dateFormatted}
             </div>
             <div className={styles.TimeText}>
             {startTime} − {endTime}
