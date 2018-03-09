@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './SpotsLeft.css';
+import styles from './spotsLeft.css';
 
 class SpotsLeft extends React.Component {
   constructor(props) {
