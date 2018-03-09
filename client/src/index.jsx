@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import $ from 'jquery';
 import AvailableDateModalList from './components/modalList.jsx';
-// import AvailableDateModal from './components/AvailableDateModal.jsx';
 import Modal from './components/modal-shim.js';
 import { Button } from 'react-bootstrap';
 import styles from './index.css';
@@ -46,10 +45,6 @@ class App extends React.Component {
 
   handleScroll(event) {
     const elem = event.currentTarget;
-    // console.log('elem', elem);
-    // console.log('elem.scrollTop', elem.scrollTop);
-    // console.log('elem.offsetHeight', elem.offsetHeight);
-    // console.log('elem.scrollHeight', elem.scrollHeight);
 
     if (elem.scrollHeight - elem.offsetHeight === elem.scrollTop) {
       this.getScheduledExperiences();
@@ -61,6 +56,7 @@ class App extends React.Component {
 
     return (
       <div>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
         <div>
           <div className={styles['page-container']}>
             <div className={styles['title']}>Upcoming availability</div>

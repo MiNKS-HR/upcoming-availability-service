@@ -20,7 +20,6 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../public'));
 app.use('/experience/availableDate', availableDateRouter);
 
-console.log('mongoose.connection.readyState', mongoose.connection.readyState);
 app.listen(3002, function() {
   console.log('listening on port 3002');
 });
