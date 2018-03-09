@@ -3,33 +3,33 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import $ from 'jquery';
 import AvailableDateModalList from './components/modalList.jsx';
+// import AvailableDateModal from './components/AvailableDateModal.jsx';
+import Modal from './components/modal-shim.js';
+import { Button } from 'react-bootstrap';
+import styles from './index.css';
+
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      lgShow: false,
       availableDates: [],
       counter: 0,
+      direction: '',
+      lastScrollPos: 0
     };
+    this.handleScroll = this.handleScroll.bind(this);
   }
 
   componentDidMount() {
     this.getScheduledExperiences();
-
-    if (this.props.isModal) {
-      $('#Modal').on('scroll', (e) => {
-        const elem = $(e.currentTarget);
-        if (elem[0].scrollHeight - elem.scrollTop() === elem.outerHeight()) {
-          this.getScheduledExperiences();
-        }
-      });
-    }
   }
 
   getScheduledExperiences() {
     let currentCounter = this.state.counter;
 
-    axios.get('http://localhost:3002/experience/availableDate/' + currentCounter)
+    axios.get('experience/availableDate/' + currentCounter)
       .then((response) => {
         const responseData = response.data;
         const lastAvailableDate = responseData[responseData.length - 1];
@@ -44,15 +44,78 @@ class App extends React.Component {
       });
   }
 
+  handleScroll(event) {
+    const elem = event.currentTarget;
+    // console.log('elem', elem);
+    // console.log('elem.scrollTop', elem.scrollTop);
+    // console.log('elem.offsetHeight', elem.offsetHeight);
+    // console.log('elem.scrollHeight', elem.scrollHeight);
+
+    if (elem.scrollHeight - elem.offsetHeight === elem.scrollTop) {
+      this.getScheduledExperiences();
+    }
+  }
+
   render() {
+    let lgClose = () => this.setState({ lgShow: false });
+
     return (
       <div>
-        <AvailableDateModalList availableDates={(this.props.isModal) ? this.state.availableDates : this.state.availableDates.slice(0,3)} />
+        <div>
+          <div className={styles['page-container']}>
+            <div className={styles['title']}>Upcoming availability</div>
+            <AvailableDateModalList availableDates={this.state.availableDates.slice(0, 3)} />
+            <div className={styles['button-container']}>
+              <div
+                className={styles['button']}
+                onClick={() => this.setState({ lgShow: true })}
+              >
+                See all available dates
+          </div>
+            </div>
+
+            <AvailableDateModal
+              show={this.state.lgShow}
+              onHide={lgClose}
+              onScroll={this.handleScroll}
+              availabledates={this.state.availableDates}
+            />
+          </div>
+        </div>
       </div>
+    );
+  }
+};
+
+class AvailableDateModal extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log(this.props.availabledates);
+  }
+
+  render() {
+    return (
+      <Modal
+        {...this.props}
+        bsSize="large"
+        aria-labelledby="contained-modal-title-lg"
+      >
+        <div className={styles['modal-content']}>
+          <div className={styles['modal-body']}>
+            <div className={styles['modal-close']}>
+              <svg onClick={this.props.onHide} className={styles['modal-close-button']} viewBox="0 0 24 24" role="img" focusable="false"><path d="m23.25 24c-.19 0-.38-.07-.53-.22l-10.72-10.72-10.72 10.72c-.29.29-.77.29-1.06 0s-.29-.77 0-1.06l10.72-10.72-10.72-10.72c-.29-.29-.29-.77 0-1.06s.77-.29 1.06 0l10.72 10.72 10.72-10.72c.29-.29.77-.29 1.06 0s .29.77 0 1.06l-10.72 10.72 10.72 10.72c.29.29.29.77 0 1.06-.15.15-.34.22-.53.22" fillRule="evenodd"></path></svg>
+            </div>
+            <br />
+            <div className={styles['modal-title']}>When do you want to go?</div>
+            <div className={styles['modal-subtitle']}>If you can’t find the dates you want, try contacting the host</div>
+            <AvailableDateModalList availableDates={this.props.availabledates} />
+          </div>
+        </div>
+      </Modal>
     );
   }
 }
 
-ReactDOM.render(<App isModal={false}/>, document.getElementById('app2'));
+export default App;
 
-ReactDOM.render(<App isModal={true}/>, document.getElementById('app'));
+ReactDOM.render(<App/>, document.getElementById('app'));
