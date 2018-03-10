@@ -32,6 +32,7 @@
     "mongodb-memory-server": "^1.7.0",
     "mongoose": "^4.6.4",
     "npm": "^5.7.1",
+    "path": "^0.12.7",
     "popper.js": "^1.12.9",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
