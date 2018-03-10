@@ -17,7 +17,10 @@ app.use(webpackDevMiddleware(compiler, {
 mongoose.connect('mongodb://database/experiences');
 
 app.use(bodyParser.json());
-app.use(express.static(__dirname + '/../public'));
+
+app.get('/:id', (req, res) => res.sendFile(path.join(__dirname + '/../public/index.html')));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname + '/../public/index.html')));
+app.use('/availability/content/', express.static(__dirname + '/../public'));
 app.use('/experience/availableDate', availableDateRouter);
 
 app.listen(3002, function() {
