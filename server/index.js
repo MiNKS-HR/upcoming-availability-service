@@ -5,6 +5,7 @@ var availableDateRouter = require('./routers/availableDate.js');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const seed = require('../db/seed.js');
+const path = require('path');
 
 const config = require('../webpack.config.js');
 const compiler = webpack(config);
@@ -14,13 +15,13 @@ app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath
 }));
 
-mongoose.connect('mongodb://database/experiences');
+mongoose.connect('mongodb://localhost/experiences');
 
 app.use(bodyParser.json());
 
-app.get('/:id', (req, res) => res.sendFile(path.join(__dirname + '/../public/index.html')));
-app.get('/', (req, res) => res.sendFile(path.join(__dirname + '/../public/index.html')));
-app.use('/availability/content/', express.static(__dirname + '/../public'));
+app.get('/:id', (req, res) => res.sendFile(path.join(__dirname, '..', 'public', 'index.html')));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '..', 'public', 'index.html')));
+app.use('/availability/content/', express.static(path.join(__dirname, '..', 'public')));
 app.use('/experience/availableDate', availableDateRouter);
 
 app.listen(3002, function() {
