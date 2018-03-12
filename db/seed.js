@@ -2,7 +2,7 @@ var data = require('./seed_data.js');
 var mongoose = require('mongoose');
 var AvailableDates = require('./models/availableDate.js');
 
-mongoose.connect('mongodb://localhost/experiences');
+mongoose.connect('mongodb://database/experiences');
 
 var seedDb = function (data) {
   AvailableDates.insertOne(data, function (err, response) {
